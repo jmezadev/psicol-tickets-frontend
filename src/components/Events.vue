@@ -2,13 +2,13 @@
     <div class="events">
         <main role="main" class="flex-shrink-0">
             <div class="container">
-                <h1 class="mt-5">Eventos</h1>
+                <h1 class="mt-5">Próximos Eventos</h1>
                 <hr>
                 <div id="container-events" class="col-12 text-left">
                     <div class="mb-3 my-5" v-if="events.length > 0">
                         <div class="row my-2 py-3 container-event" v-for="event in events" :key="event.id">
                             <div class="col-md-4">
-                                <img src="public/images/default.png" class="card-img" alt="Evento">
+                                <img src="https://www.mrkas.com/v2/wp-content/uploads/2014/10/default-placeholder-1024x1024-570x321.png" class="card-img" alt="Evento">
                             </div>
                             <div class="col-md-8">
                                 <div class="card-body">
@@ -65,9 +65,8 @@
                             <label for="quantity" class="text-bold">Total:</label> &nbsp;&nbsp; $<span v-text="this.formBuyTickets.total"></span>
                         </div>
                         <hr>
-                        <label for="select-user">Usuario:</label>
+                        <label for="select-user">Seleccione Usuario:</label>
                         <select class="form-control" name="location_id" id="select-user" @change="handleSelectUser($event)" v-model="formBuyTickets.user_id">
-                            <option value="" selected>Seleccione el usuario</option>
                             <option v-for="user in this.users" :key="user.id" :value="user.id">{{ user.name }} {{ user.last_name }}</option>
                         </select>
                     </div>
@@ -146,8 +145,13 @@
             },
             handleSelectEventLocation(event_location) {
                 if(event_location.target.value !== "") {
+                    if(this.formBuyTickets.user_id !== null) {
+                        this.showBuyButton = true;
+                    } else {
+                        this.showBuyButton = false;
+                    }
+
                     this.showEventLocationInfo = true;
-                    this.showBuyButton = true;
                     this.formBuyTickets.event_selected_location_id = event_location.target.value;
                     this.calculateTotal();
                 } else {
