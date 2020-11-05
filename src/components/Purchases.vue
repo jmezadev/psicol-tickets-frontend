@@ -4,7 +4,7 @@
             <div class="container text-left">
                 <h1 class="mt-5">Compras realizadas</h1>
                 <hr>
-                <div class="col-12">
+                <div class="col-12 mb-5">
                     <label for="select-user">Usuario:</label>
                     <select class="form-control" name="location_id" id="select-user" @change="handleSelectUser($event)">
                         <option value="" selected>Seleccione el usuario</option>
@@ -47,15 +47,14 @@
                 axios.post(API_ROUTE + '/users/tickets', {user_id: this.user_id})
                     .then(response => {
                     console.log(response);
-
-                        this.errors = null;
+                        /*this.errors = null;
                         this.$swal({
                             icon: 'success',
                             title: '¡Correcto!',
                             text: 'Usuario registrado exitosamente!',
                         });
 
-                        this.resetForm();
+                        this.resetForm();*/
                 }).catch(e => {
                     console.log('------------');
                     console.log(e.response);
