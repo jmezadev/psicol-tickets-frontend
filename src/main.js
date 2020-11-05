@@ -18,6 +18,7 @@ import 'sweetalert2/dist/sweetalert2.min.css';
 
 Vue.use(VueSweetalert2);
 
+export var ROUTE = 'http://psicoltickets.test/images/';
 export var API_ROUTE = 'http://psicoltickets.test/api';
 
 new Vue({

@@ -11,6 +11,19 @@
                         <option v-for="user in this.users" :key="user.id" :value="user.id">{{ user.name }} {{ user.last_name }}</option>
                     </select>
                 </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card mb-3" v-for="transaction in user_transactions.transactions" :key="transaction.id">
+                        <div class="card-header">{{ transaction.event_name }} - {{ transaction.event_time }}</div>
+                        <div class="card-body">
+                            <h5 class="card-title">Boletas compradas: {{ transaction.tickets_count }}</h5>
+                            <p class="card-text">Fecha de Compra: {{ transaction.date }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="noTransactions" class="col-12">
+                    <h5>Sin transacciones</h5>
+                </div>
             </div>
         </main>
     </div>
@@ -27,7 +40,9 @@
         },
         data() {
             return {
+                noTransactions: false,
                 users: [],
+                user_transactions: [],
                 user_id: "",
             }
         },
@@ -41,25 +56,17 @@
                 });
             },
             handleSelectUser(user) {
-                console.log("HERE");
+                this.user_transactions = []; // Reset array
+                this.noTransactions = false;
                 this.user_id = user.target.value;
 
                 axios.post(API_ROUTE + '/users/tickets', {user_id: this.user_id})
                     .then(response => {
-                    console.log(response);
-                        /*this.errors = null;
-                        this.$swal({
-                            icon: 'success',
-                            title: '¡Correcto!',
-                            text: 'Usuario registrado exitosamente!',
-                        });
-
-                        this.resetForm();*/
-                }).catch(e => {
-                    console.log('------------');
-                    console.log(e.response);
-                    this.errors = e.response.data.errors;
-                });
+                        this.user_transactions = response.data;
+                        if(response.data.transactions.length === 0) {
+                            this.noTransactions = true;
+                        }
+                    });
             },
             resetForm() {
                 this.formUser.name = null;

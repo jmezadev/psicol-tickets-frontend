@@ -10,7 +10,7 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <router-link to="/" class="nav-link">Eventos</router-link>
                         </li>
                         <li class="nav-item">
@@ -35,15 +35,9 @@
 </template>
 
 <script>
-    // import HelloWorld from './components/HelloWorld.vue'
-    // import Events from './components/Events.vue'
-
     export default {
         name: 'App',
-        components: {
-            // HelloWorld,
-            // Events
-        }
+        components: {}
     }
 </script>
 

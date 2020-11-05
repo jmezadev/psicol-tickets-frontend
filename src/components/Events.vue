@@ -7,10 +7,10 @@
                 <div id="container-events" class="col-12 text-left">
                     <div class="mb-3 my-5" v-if="events.length > 0">
                         <div class="row my-2 py-3 container-event" v-for="event in events" :key="event.id">
-                            <div class="col-md-4">
-                                <img src="https://www.mrkas.com/v2/wp-content/uploads/2014/10/default-placeholder-1024x1024-570x321.png" class="card-img" alt="Evento">
+                            <div class="col-md-3">
+                                <img :src="ROUTE + event.image" class="card-img" alt="Evento">
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-md-9">
                                 <div class="card-body">
                                     <h5 class="card-title" v-text="event.name"></h5>
                                     <p class="card-text" v-text="event.description"></p>
@@ -88,12 +88,14 @@
 <script>
     import axios from 'axios';
     import { API_ROUTE } from '../main.js'
+    import { ROUTE } from '../main.js'
 
     export default {
         name: 'Events',
         props: {},
         data() {
             return {
+                ROUTE: ROUTE,
                 users: [],
                 events: [],
                 showModal: false,
